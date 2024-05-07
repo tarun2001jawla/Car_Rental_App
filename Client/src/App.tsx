@@ -9,6 +9,7 @@ import Navbar from './components/NavBar/NavBar';
 import HomePage from './components/Home/Home';
 import Footer from './components/Footer/Footer';
 import RentalPage from './Pages/Rentals/Rentals';
+import AboutUs from './Pages/About Us/AboutUs';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/login' element={<LoginForm />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/rentals' element={<RentalPage/>} />
+          <Route path='/about' element={<AboutUs/>} />
         </Routes>
         <ToastContainer />
        

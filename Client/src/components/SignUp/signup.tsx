@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent, MouseEvent } from 'react';
-import { Box, FormControl, FormLabel, Input, Button, Flex, Text,Link, InputGroup, InputRightElement } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, Input, Button, Flex, Text, Link, InputGroup, InputLeftAddon, InputRightElement } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -87,18 +87,42 @@ const SignupForm: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <FormControl isRequired>
             <FormLabel htmlFor="name">Name</FormLabel>
-            <Input type="text" id="name" value={formData.name} onChange={handleChange} name="name" />
+            <Input
+              type="text"
+              id="name"
+              value={formData.name}
+              onChange={handleChange}
+              name="name"
+              placeholder="John Doe"
+            />
           </FormControl>
           <FormControl isRequired mt={4}>
             <FormLabel htmlFor="email">Email</FormLabel>
-            <Input type="email" id="email" value={formData.email} onChange={handleChange} name="email" />
+            <Input
+              type="email"
+              id="email"
+              value={formData.email}
+              onChange={handleChange}
+              name="email"
+              placeholder="JohnDoe@gmail.com"
+            />
             <Text fontSize="sm" color="gray.500" mt={1}>
               We'll never share your email.
             </Text>
           </FormControl>
           <FormControl isRequired mt={4}>
             <FormLabel htmlFor="phone">Phone</FormLabel>
-            <Input type="tel" id="phone" value={formData.phone} onChange={handleChange} name="phone" />
+            <InputGroup>
+              <InputLeftAddon>+91</InputLeftAddon>
+              <Input
+                type="tel"
+                id="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                name="phone"
+                placeholder="12345679"
+              />
+            </InputGroup>
           </FormControl>
           <FormControl isRequired mt={4}>
             <FormLabel htmlFor="password">Password</FormLabel>
@@ -120,7 +144,14 @@ const SignupForm: React.FC = () => {
               Minimum length: 6
             </Text>
           </FormControl>
-          <Button type="submit" mt={4} bg="teal.500" color="white" _hover={{ bg: 'teal.600' }} className="signup-button">
+          <Button
+            type="submit"
+            mt={4}
+            bg="teal.500"
+            color="white"
+            _hover={{ bg: 'teal.600' }}
+            className="signup-button"
+          >
             Sign Up
           </Button>
         </form>

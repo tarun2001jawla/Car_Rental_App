@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Flex,
-  Heading,
   Input,
   InputGroup,
   InputLeftElement,
   Spacer,
   Button,
+  Image, 
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { getCookie } from '../../utils/cookieUtil';
 import UserNavigationBar from './UserNavigationBar';
-import './NavBar.css'
+import logo from '../../../public/car.svg'; 
+import './NavBar.css';
 
 interface NavbarProps {}
 
 const Navbar: React.FC<NavbarProps> = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userName, setUserName] = useState<string>('');
-  //const navigate = useNavigate();
 
   useEffect(() => {
     const token = getCookie('token');
@@ -38,9 +38,7 @@ const Navbar: React.FC<NavbarProps> = () => {
   return (
     <Flex bg="teal.500" p={4} alignItems="center" className="navbar">
       <Flex alignItems="center">
-        <Heading as="h1" size="lg" color="white" mr={8}>
-          Car Rental
-        </Heading>
+        <Image src={logo} alt="Logo" boxSize="50px" mr={4} /> 
         <InputGroup>
           <InputLeftElement pointerEvents="none">
             <SearchIcon color="gray.300" />
