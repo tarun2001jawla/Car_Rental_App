@@ -12,6 +12,7 @@ interface ICar extends Document {
   pricePerDay: number; 
   licensePlate: string;
   CoverImageURL: string;
+  availability : number;
 }
 
 const carSchema = new mongoose.Schema({
@@ -54,6 +55,10 @@ const carSchema = new mongoose.Schema({
     CoverImageURL: {
         type: String,
         required: false, 
+    },
+    availability:{
+        type : Number,
+        required : true,
     }
 });
 

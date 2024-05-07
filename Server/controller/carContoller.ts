@@ -62,7 +62,7 @@ const getAllCars = async (req: Request, res: Response) => {
 const createCar = async (req: CustomRequest, res: Response) => {
   try {
     console.log('req.user in createCar:', req.user); 
-    const { type, make, year, mileage, fuelType, transmission, seats, pricePerDay, licensePlate,Car_model} = req.body;
+    const { type, make, year, mileage, fuelType, transmission, seats, pricePerDay, licensePlate,Car_model,availability} = req.body;
     console.log("req body", req.body);
     console.log('Uploaded file:', req.file);
     const CoverImageURL = req.file ? `/images/${req.file.filename}` : '';
@@ -80,6 +80,7 @@ const createCar = async (req: CustomRequest, res: Response) => {
       pricePerDay,
       licensePlate,
       CoverImageURL,
+      availability
     });
 
     const car = await newCar.save();
