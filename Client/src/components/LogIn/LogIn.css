@@ -1,0 +1,16 @@
+.login-container {
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .login-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: teal;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .login-button {
+    font-weight: bold;
+  }

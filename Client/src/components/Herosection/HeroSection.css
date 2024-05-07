@@ -1,0 +1,24 @@
+.hero-section {
+  background-image: url('../../../public//HeroSectionImage.svg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: overlay;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+}
+
+.hero-content h1
+ {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.highlight {
+  color: #fff724; 
+  font-weight: bold;
+  font-size: 75px;
+ 
+}

@@ -1,0 +1,47 @@
+
+.car-card {
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  
+  .car-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .car-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .car-info {
+    padding: 1rem;
+  }
+  
+  .car-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .car-detail {
+    margin-bottom: 0.5rem;
+  }
+  
+  .car-detail-heading {
+    font-size: 0.875rem;
+    font-weight: bold;
+  }
+  
+  .car-detail-value {
+    font-size: 0.875rem;
+  }
+  
+  .car-rent-button {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
