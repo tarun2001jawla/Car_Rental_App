@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
       </Flex>
 
      
-      <Flex className="footer-bottom" mt={8} justifyContent="space-between" alignItems="center" maxW="1200px" mx="auto">
+      <Flex className="footer-bottom" justifyContent="space-between" alignItems="center" maxW="1200px" mx="auto">
         <Text>&copy; {new Date().getFullYear()} Car Rental. All rights reserved.</Text>
         <Text>Developed By Tarun Jawla</Text>
       </Flex>

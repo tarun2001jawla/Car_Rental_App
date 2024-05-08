@@ -10,6 +10,9 @@ import HomePage from './components/Home/Home';
 import Footer from './components/Footer/Footer';
 import RentalPage from './Pages/Rentals/Rentals';
 import AboutUs from './Pages/About Us/AboutUs';
+import Cart from './Pages/cart/cart';
+import Erro404NotFoundPage from './components/404Page/404';
+//import CarReservationConfirmForm from './components/ReservationConfirmForm/ReservationForm';
 
 function App() {
   return (
@@ -23,7 +26,11 @@ function App() {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/rentals' element={<RentalPage/>} />
           <Route path='/about' element={<AboutUs/>} />
+          <Route path='/reserve' element={<AboutUs/>} />
+          <Route path='/cart' element={<Cart/>} />
+          <Route path='*' element={<Erro404NotFoundPage/>} />
         </Routes>
+        <Footer/>
         <ToastContainer />
        
       </ChakraProvider>

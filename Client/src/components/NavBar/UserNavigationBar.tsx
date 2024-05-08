@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Text } from '@chakra-ui/react';
+import { Button, Text,IconButton} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa'; // Import the cart icon
 import './NavBar.css'
 
 interface UserNavigationProps {
@@ -23,6 +24,13 @@ const UserNavigation: React.FC<UserNavigationProps> = ({
         <Button colorScheme="teal" variant="solid" onClick={onLogout}>
           Logout
         </Button>
+        <IconButton
+              aria-label="Cart"
+              icon={<FaShoppingCart />}
+              variant="ghost"
+              colorScheme="blue"
+              mr={2}
+            />
       </>
     );
   }
@@ -35,6 +43,13 @@ const UserNavigation: React.FC<UserNavigationProps> = ({
       <Button as={Link} to="/signup" colorScheme="teal">
         Sign Up
       </Button>
+     <IconButton
+              aria-label="Cart"
+              icon={<FaShoppingCart />}
+              variant="ghost"
+              colorScheme="blue"
+              mr={2}
+            />
     </>
   );
 };

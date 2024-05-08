@@ -17,7 +17,7 @@ interface CarData {
   pricePerDay: number;
   licensePlate: string;
   CoverImageURL: string;
-  availability: number; // Adding availability to the interface
+  availability: number; 
 }
 
 const RentalPage: React.FC = () => {

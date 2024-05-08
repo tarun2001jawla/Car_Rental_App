@@ -1,0 +1,13 @@
+.reservation-form {
+    max-width: 500px; 
+    width: 100%; 
+  }
+  
+  .reservation-form .modal-body {
+    padding: 20px; /
+  }
+  
+  .reservation-form .form-control {
+    margin-bottom: 20px; 
+  }
+  

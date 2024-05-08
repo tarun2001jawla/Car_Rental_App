@@ -52,7 +52,7 @@ const LoginForm: React.FC = () => {
         transition: Bounce,
       });
 
-      // Set the JWT token in a cookie
+      // Setting  the JWT token in a cookie
       document.cookie = `token=${response.data.token}; path=/`;
       console.log(`token=${response.data.token}`);
 
@@ -61,7 +61,7 @@ const LoginForm: React.FC = () => {
         password: '',
       });
 
-      navigate('/'); // Redirect to the home page
+      navigate('/'); 
     } catch (err) {
       console.error('Error occurred while logging in:', err);
       toast.error(`Error occurred while logging in: ${err}`, {
