@@ -1,9 +1,9 @@
 import React, { useState, FormEvent } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, Button, useToast, Flex, IconButton } from '@chakra-ui/react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 import './ReservationForm.css';
-import { getCookie } from '../../utils/cookieUtil';
+import { getCookie } from '../../utils/jwtDecode';
 
 interface RentBookingConfirmFormProps {
   isOpen: boolean;
