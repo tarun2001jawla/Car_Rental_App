@@ -13,7 +13,7 @@ import AboutUs from './Pages/About Us/AboutUs';
 import Cart from './Pages/cart/cart';
 import Erro404NotFoundPage from './components/404Page/404';
 //import CarReservationConfirmForm from './components/ReservationConfirmForm/ReservationForm';
-
+import ConfirmationPage from './components/ReservationConfirmForm/Confirmation';
 function App() {
   return (
     <BrowserRouter>
@@ -28,6 +28,7 @@ function App() {
           <Route path='/about' element={<AboutUs/>} />
           <Route path='/reserve' element={<AboutUs/>} />
           <Route path='/cart' element={<Cart/>} />
+          <Route path='/confirm-booking' element={<ConfirmationPage/>} />
           <Route path='*' element={<Erro404NotFoundPage/>} />
         </Routes>
         <Footer/>

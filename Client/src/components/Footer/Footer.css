@@ -1,7 +1,9 @@
 .footer {
     background-color: #1a202c;
     color: #fff;
-  }
+    
+  
+    }
   
   .footer-container {
     max-width: 1200px;
@@ -12,4 +14,6 @@
   .footer-bottom {
     padding: 1rem 2rem;
     border-top: 1px solid #4a5568;
+ 
+   
   }

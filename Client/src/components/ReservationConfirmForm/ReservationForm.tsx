@@ -1,12 +1,13 @@
 import React, { useState, FormEvent } from 'react';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, Button, useToast, Flex, IconButton } from '@chakra-ui/react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 import './ReservationForm.css';
+import { getCookie } from '../../utils/cookieUtil';
 
 interface RentBookingConfirmFormProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (formData: FormData) => void;
   carDetails: {
     make: string;
     Car_model: string;
@@ -21,12 +22,12 @@ interface FormData {
   email: string;
   driverLicense: string;
   quantity: number;
-  startDate: string; 
-  endDate: string; 
+  startDate: string;
+  endDate: string;
   totalPrice: number;
 }
 
-const CarReservationConfirmForm: React.FC<RentBookingConfirmFormProps> = ({ isOpen, onClose, onConfirm, carDetails }) => {
+const CarReservationConfirmForm: React.FC<RentBookingConfirmFormProps> = ({ isOpen, onClose, carDetails }) => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     mobileNumber: '',
@@ -37,7 +38,10 @@ const CarReservationConfirmForm: React.FC<RentBookingConfirmFormProps> = ({ isOp
     endDate: new Date().toISOString().split('T')[0],
     totalPrice: carDetails.pricePerDay,
   });
+  
+  
   const toast = useToast();
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,7 +61,7 @@ const CarReservationConfirmForm: React.FC<RentBookingConfirmFormProps> = ({ isOp
     }
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.mobileNumber || !formData.email || !formData.driverLicense) {
       toast({
@@ -69,8 +73,34 @@ const CarReservationConfirmForm: React.FC<RentBookingConfirmFormProps> = ({ isOp
       });
       return;
     }
-    onConfirm(formData);
-    onClose();
+
+    const orderData = {
+      items: [{
+        carID: carDetails.make + carDetails.Car_model + carDetails.year,
+        make: carDetails.make,
+        Car_model: carDetails.Car_model,
+        year: carDetails.year,
+        pricePerDay: carDetails.pricePerDay,
+        quantity: formData.quantity,
+      }],
+      totalPrice: formData.totalPrice,
+      details: {
+        name: formData.name,
+        phone: formData.mobileNumber,
+        email: formData.email,
+        license: formData.driverLicense,
+      },
+    };
+    const token = getCookie('token');
+
+    if (!token) {
+      return navigate('/login');
+    } else {
+      navigate('/confirm-booking', { state: { orderData } });
+    }
+  
+
+    
   };
 
   return (

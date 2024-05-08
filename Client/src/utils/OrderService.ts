@@ -12,7 +12,6 @@ interface OrderItem {
 interface UserDetails {
   name: string;
   phone: string;
-  address: string;
   email: string;
   license: string;
 }

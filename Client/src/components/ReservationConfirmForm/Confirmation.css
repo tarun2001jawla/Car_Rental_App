@@ -1,0 +1,29 @@
+.confirmation-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.confirmation-page img {
+  max-width: 300px;
+  margin-bottom: 2rem;
+}
+
+.confirmation-page h1 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.confirmation-page a {
+  color: #319795;
+  font-weight: bold;
+ 
+}
+
+.confirmation-page a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
