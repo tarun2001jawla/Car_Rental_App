@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
         <Button as={Link} to="/about" colorScheme="teal" variant="ghost" mr={4}>
           About Us
         </Button>
-        <Button as={Link} to="/contact" colorScheme="teal" variant="ghost" mr={4}>
+        <Button as={Link} to="/query" colorScheme="teal" variant="ghost" mr={4}>
           Contact Us
         </Button>
       </Flex>

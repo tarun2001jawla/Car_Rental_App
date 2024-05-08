@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button, Text} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { LuLogOut } from "react-icons/lu";
 
 import './NavBar.css';
 
@@ -19,7 +20,7 @@ const UserNavigation: React.FC<UserNavigationProps> = ({ isLoggedIn, userName, o
           Hello, {userName}
         </Text>
         <Button colorScheme="red" variant="solid" onClick={onLogout}>
-          Logout
+        <LuLogOut />
         </Button>
       
       </>

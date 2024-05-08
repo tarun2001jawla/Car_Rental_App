@@ -68,9 +68,7 @@ const Car: React.FC<CarProps> = ({ car }) => {
           <CarReservationConfirmForm
             isOpen={showForm}
             onClose={() => setShowForm(false)}
-            onConfirm={(formData) => {
-              console.log("Form Data is:" ,formData)
-            }}
+           
             carDetails={car}
           />
         )}
