@@ -1,0 +1,40 @@
+.order-history-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .order-card {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .order-header h4 {
+    margin: 0;
+  }
+  
+  .order-body {
+    margin-bottom: 10px;
+  }
+  
+  .actions-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .order-history-container {
+      grid-template-columns: 1fr;
+    }
+  }

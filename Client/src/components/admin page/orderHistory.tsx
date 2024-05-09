@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import {
-  Flex,
-  Text,
-  Heading,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-} from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Flex, Text, Heading, Button } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import "./orderHistory.css";
 
 interface OrderItem {
   carID: string;
@@ -48,36 +41,46 @@ const OrderHistory = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/admin/orders');
-      setOrders(response.data);
+      const response = await axios.get(
+        "http://localhost:5000/api/admin/orders"
+      );
+      setOrders(response.data.allOrders);
     } catch (error) {
-      console.error('Error fetching orders:', error);
+      console.error("Error fetching orders:", error);
     }
   };
 
   return (
     <Flex direction="column" align="center" mt={8}>
-      <Heading mb={4}>Order History</Heading>
-      <Button colorScheme="blue" mb={4} onClick={() => navigate('/admin/add')}>
-        Add Car
-      </Button>
-      {orders.map((order) => (
-        <Card key={order._id} mb={4}>
-          <CardHeader>
-            <Flex justify="space-between">
-              <Text fontWeight="bold">Order ID: {order._id}</Text>
-              <Text>Total Price: ${order.totalPrice}</Text>
-            </Flex>
-          </CardHeader>
-          <CardBody>
-            <Text>
-              Name: {order.details.name}
-            </Text>
-            <Text>Email: {order.details.email}</Text>
-            <Text>License: {order.details.license}</Text>
-          </CardBody>
-        </Card>
-      ))}
+        <Button  colorScheme = "pink" onClick={() => navigate("/admin/add")}>Add Car</Button>
+      <div className="actions-container">
+        <Heading mb={4}>Order History</Heading>
+      </div>
+      <div className="order-history-container">
+        {orders.length > 0 ? (
+          orders.map((order) => (
+            <div className="order-card" key={order._id}>
+              <div className="order-header">
+                <Text fontWeight="bold">Order ID: {order._id}</Text>
+                <Text>Total Price: ${order.totalPrice}</Text>
+              </div>
+              <div className="order-body">
+                <Text>Name: {order.details.name}</Text>
+                <Text>Email: {order.details.email}</Text>
+                <Text>License: {order.details.license}</Text>
+              </div>
+              <Button
+                colorScheme="red"
+                mb={4}
+              >
+                View Details
+              </Button>
+            </div>
+          ))
+        ) : (
+          <Text>No orders found.</Text>
+        )}
+      </div>
     </Flex>
   );
 };
