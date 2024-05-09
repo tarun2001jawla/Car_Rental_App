@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// Navbar.tsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Flex, Input, InputGroup, InputLeftElement, Spacer, Button, Image } from '@chakra-ui/react';
