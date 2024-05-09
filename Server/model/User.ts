@@ -4,7 +4,7 @@ interface IUser extends Document {
   name: string;
   email: string;
   phone: string;
-  password: string;
+  password: string; 
 }
 
 const userSchema: Schema = new Schema(
@@ -25,6 +25,7 @@ const userSchema: Schema = new Schema(
       type: String,
       require: true,
     },
+    
   },
   { timestamps: true }
 );

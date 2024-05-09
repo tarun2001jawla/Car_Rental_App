@@ -1,28 +1,33 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 interface OrderItem {
-  carId: string;
-  carName: string;
+  carID: string;
+  make: string;
+  Car_model: string; 
+  year: number; 
+  mileage: number; 
+  fuelType: string;
+  transmission: string;
+  seats: number; 
+  pricePerDay: number; 
+  quantity : number;
+  
 }
 
-interface AddressData {
+interface UserDetails {
   name: string;
   phone: string;
-  street: string;
-  city: string;
-  pincode: string;
-  country: string;
   email: string;
-  licenseNumber: string;
+  license : string;
 }
 
 interface OrderDocument extends Document {
   items: OrderItem[];
   totalPrice: number;
-  address: AddressData;
+  details: UserDetails;
 }
 
-const addressSchema = new Schema<AddressData>({
+const userDetailsSchema = new Schema<UserDetails>({
   name: {
     type: String,
     required: true,
@@ -31,37 +36,26 @@ const addressSchema = new Schema<AddressData>({
     type: String,
     required: true,
   },
-  street: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-    required: true,
-  },
-  pincode: {
-    type: String,
-    required: true,
-  },
-  country: {
-    type: String,
-    required: true,
-  },
+ 
   email: {
     type: String,
     required: true,
   },
-});
+  license : {
+    type: String,
+    required: true,
+  }
+},{timestamps:true});
 
 const orderSchema = new Schema<OrderDocument>({
   items: [
     {
-      carId: { type: String, required: true },
-      carName: { type: String, required: true },
+      carID: { type: String, required: true },
+      quantity: { type: Number, required: true },
     },
   ],
   totalPrice: { type: Number, required: true },
-  address: { type: addressSchema, required: true },
+  details: { type: userDetailsSchema, required: true },
 });
 
 const Order = mongoose.model<OrderDocument>("Order", orderSchema);

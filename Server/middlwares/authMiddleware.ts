@@ -31,5 +31,20 @@ function checkForAuthentication(req: CustomRequest, res: Response, next: NextFun
 }
 
 
+const checkForAdminRole = (req: CustomRequest, res: Response, next: NextFunction) => {
+  try {
+    const user = req.user;
+    console.log('User:', user);
+    if (user && user.role.trim() === 'admin') {
+      next();
+    } else {
+      return res.status(401).json({ message: 'Unauthorized - You are not an admin' });
+    }
+  } catch (err) {
+    console.error('Error in checkAdminRole middleware:', err);
+    res.status(500).send('Internal Server Error while checking admin role');
+  }
+};
 
-export { checkForAuthentication };
+
+export { checkForAuthentication,checkForAdminRole };

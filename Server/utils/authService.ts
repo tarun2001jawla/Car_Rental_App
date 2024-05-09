@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 // Load environment variables from .env file
 dotenv.config();
 
+//JWT KEY 
 const key = process.env.JWT_SECRET_KEY;
 
 interface User {
@@ -13,6 +14,7 @@ interface User {
   name: string;
 }
 
+//setting a user 
 function setUser(user: User): string {
   try {
     console.log('Key:', key);
@@ -32,7 +34,7 @@ function setUser(user: User): string {
     throw new Error('Failed to sign token');
   }
 }
-
+//getting a user 
 function getUser(token: string): User | null {
   if (!token) return null;
   try {

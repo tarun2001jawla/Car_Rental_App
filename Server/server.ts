@@ -8,6 +8,8 @@ import fs from 'fs';
 import { checkForAuthentication } from "./middlwares/authMiddleware";
 import userRoutes from './routes/userRoute';
 import carRoutes from './routes/carRoutes';
+import orderRoutes from './routes/orderRoutes'
+import adminRoutes from './routes/adminRoutes'
 
 dotenv.config();
 
@@ -35,21 +37,9 @@ app.use(cookieParser());
 //Routes 
 app.use("/api/users", userRoutes);
 app.use("/api/cars", carRoutes);
+app.use("/api/reserve",orderRoutes);
+app.use("/api/admin",adminRoutes);
 
-// Route to get JSON Data
-// app.get('/api/cars', (req, res) => {
-//     const filePath = path.join(__dirname, 'model', 'CarData.json');
-//     fs.readFile(filePath, (err, data) => {
-//       if (err) {
-//         console.log('Current directory:', __dirname);
-//         console.error(err);
-//         res.status(500).json({ message: 'Error reading file' });
-//       } else {
-//         const carsData = JSON.parse(data.toString());
-//         res.json(carsData);
-//       }
-//     });
-// });
 
 
 
