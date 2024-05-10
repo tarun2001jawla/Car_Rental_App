@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useToast } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useToast } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Flex,
@@ -16,7 +16,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   Heading,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const axiosInstance = axios.create({
   withCredentials: true,
@@ -25,91 +25,85 @@ const axiosInstance = axios.create({
 const CarAddForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    type: "",
-    make: "",
-    Car_model: "",
+    type: '',
+    make: '',
+    Car_model: '',
     year: 0,
     mileage: 0,
-    fuelType: "",
-    transmission: "",
+    fuelType: '',
+    transmission: '',
     seats: 0,
     pricePerDay: 0,
-    licensePlate: "",
+    licensePlate: '',
     availability: 0,
   });
   const toast = useToast();
 
-  const handleChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted with data:", formData);
+    console.log('Form submitted with data:', formData);
 
-    // Validate form fields
-    if (
-      !formData.type ||
-      !formData.make ||
-      !formData.Car_model ||
-      !formData.year.toString() ||
-      !formData.mileage.toString() ||
-      !formData.fuelType ||
-      !formData.transmission ||
-      !formData.seats.toString() ||
-      !formData.pricePerDay.toString() ||
-      !formData.licensePlate ||
-      !formData.availability.toString()
-    ) {
-      toast({
-        title: "Please fill all the fields",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-      return;
-    }
+   
+      // Validate form fields
+     if (
+ !formData.type ||
+ !formData.make ||
+ !formData.Car_model ||
+ !formData.year.toString() ||
+ !formData.mileage.toString() ||
+ !formData.fuelType ||
+ !formData.transmission ||
+ !formData.seats.toString() ||
+ !formData.pricePerDay.toString() ||
+ !formData.licensePlate ||
+ !formData.availability.toString()
+) {
+  toast({
+    title: 'Please fill all the fields',
+    status: 'error',
+    duration: 5000,
+    isClosable: true,
+  });
+  return;
+}
+  
 
     try {
-      const response = await axiosInstance.post(
-        "http://localhost:5000/api/admin/add",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("Car added successfully:", response.data);
+      const response = await axiosInstance.post('http://localhost:5000/api/admin/add', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log('Car added successfully:', response.data);
       toast({
-        title: "Car added successfully",
-        status: "success",
+        title: 'Car added successfully',
+        status: 'success',
         duration: 5000,
         isClosable: true,
       });
       setFormData({
-        type: "",
-        make: "",
-        Car_model: "",
+        type: '',
+        make: '',
+        Car_model: '',
         year: 0,
         mileage: 0,
-        fuelType: "",
-        transmission: "",
+        fuelType: '',
+        transmission: '',
         seats: 0,
         pricePerDay: 0,
-        licensePlate: "",
+        licensePlate: '',
         availability: 0,
       });
     } catch (error) {
-      console.error("Error adding car:", error);
+      console.error('Error adding car:', error);
       toast({
-        title: "Error adding car",
-        status: "error",
+        title: 'Error adding car',
+        status: 'error',
         duration: 5000,
         isClosable: true,
       });
@@ -264,11 +258,7 @@ const CarAddForm = () => {
             </NumberInput>
           </FormControl>
           <Flex justify="flex-end">
-            <Button
-              variant="ghost"
-              mr={4}
-              onClick={() => navigate("/admin/login")}
-            >
+            <Button variant="ghost" mr={4} onClick={() => navigate("/admin/login")}>
               Cancel
             </Button>
             <Button colorScheme="teal" type="submit">

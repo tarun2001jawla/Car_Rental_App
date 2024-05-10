@@ -5,35 +5,6 @@ import multer from 'multer';
 import path from "path";
 import fs from 'fs';
 
-// // Set up multer storage
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     // Define the upload folder path
-//     const uploadFolder = path.resolve(__dirname, '..//../server/public');
-        
-
-//     // Set the upload folder
-//     cb(null, uploadFolder);
-
-//     // Check if the directory exists, if not, create it
-//     if (!fs.existsSync(uploadFolder)) {
-//       fs.mkdirSync(uploadFolder, { recursive: true });
-//     }
-//   },
-//   filename: (req, file, cb) => {
-//     // Generate a unique filename based on current timestamp
-//     const extension = path.extname(file.originalname);
-//     const timestamp = Date.now();
-//     const filename = `car-image-${timestamp}${extension}`;
-//     cb(null, filename);
-//   }
-// });
-
-// // Initialize multer with storage options
-// const upload = multer({
-//   storage: storage,
-//   limits: { fileSize: 1024 * 1024 * 20 } // Limit file size to 20MB
-// });
 
 
 
