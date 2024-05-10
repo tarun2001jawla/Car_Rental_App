@@ -31,12 +31,12 @@ npm run dev
 
 ## Usage
 ### Login
-![Login]('./Images/Screenshot (171).png')
+![Login](./Images/Screenshot (171).png)
 
 Users can log in to their accounts using their credentials. Authentication is implemented using JWT tokens.
 
 ### Sign Up
-![Sign Up]('./Images/Screenshot (172).png')
+![Sign Up](./Images/Screenshot (172).png)
 
 New users can create accounts by providing their details and registering with the platform.
 
