@@ -71,8 +71,8 @@ passport.use(
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID || '869079217064-rgrjbdhfuubi51fc2kksfn11va6sfegm.apps.googleusercontent.com',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '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',
+      clientID: process.env.GOOGLE_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
       callbackURL: 'http://localhost:5000/auth/google/callback',
       
       
