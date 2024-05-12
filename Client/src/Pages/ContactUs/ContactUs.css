@@ -1,0 +1,115 @@
+:root {
+    --s: 25vmin;
+    --p: calc(var(--s) / 2);
+    --c1: pink;
+    --c2: dodgerblue;
+    --c3: white;
+    --bg: var(--c3);
+    --d: 10000ms;
+    --e: cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  
+  .contact-form-container {
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(45deg, var(--c1) 25%, transparent 25%),
+      linear-gradient(-45deg, var(--c1) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, var(--c2) 75%),
+      linear-gradient(-45deg, transparent 75%, var(--c2) 75%);
+    background-size: var(--s) var(--s);
+    background-position:
+      calc(var(--p) * -1) calc(var(--p) * 0),
+      calc(var(--p) * 1) calc(var(--p) * -1),
+      calc(var(--p) * -1) calc(var(--p) * 1),
+      calc(var(--p) * 1) calc(var(--p) * 0);
+    animation:
+      color var(--d) var(--e) infinite,
+      position var(--d) var(--e) infinite;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .contact-form {
+    background-color: #fff;
+  }
+  
+  .form-input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .form-input:focus {
+    border-color: #2196f3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+    outline: none;
+  }
+  
+  .submit-button {
+    background: linear-gradient(to right, #2196f3, #00bcd4);
+    color: #fff;
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .submit-button:hover {
+    transform: translateY(-2px);
+  }
+  
+  @keyframes color {
+    0%, 25% {
+      --bg: var(--c3);
+    }
+    26%, 50% {
+      --bg: var(--c1);
+    }
+    51%, 75% {
+      --bg: var(--c3);
+    }
+    76%, 100% {
+      --bg: var(--c2);
+    }
+  }
+  
+  @keyframes position {
+    0% {
+      background-position:
+        calc(var(--p) * -1) calc(var(--p) * 0),
+        calc(var(--p) * 1) calc(var(--p) * -1),
+        calc(var(--p) * -1) calc(var(--p) * 1),
+        calc(var(--p) * 1) calc(var(--p) * 0);
+    }
+    25% {
+      background-position:
+        calc(var(--p) * -1) calc(var(--p) * 4),
+        calc(var(--p) * 1) calc(var(--p) * -5),
+        calc(var(--p) * -1) calc(var(--p) * -3),
+        calc(var(--p) * 1) calc(var(--p) * 4);
+    }
+    50% {
+      background-position:
+        calc(var(--p) * -3) calc(var(--p) * 8),
+        calc(var(--p) * 3) calc(var(--p) * -9),
+        calc(var(--p) * -2) calc(var(--p) * -7),
+        calc(var(--p) * 2) calc(var(--p) * 8);
+    }
+    75% {
+      background-position:
+        calc(var(--p) * -3) calc(var(--p) * 12),
+        calc(var(--p) * 3) calc(var(--p) * -13),
+        calc(var(--p) * -2) calc(var(--p) * -11),
+        calc(var(--p) * 2) calc(var(--p) * 12);
+    }
+    100% {
+      background-position:
+        calc(var(--p) * -5) calc(var(--p) * 16),
+        calc(var(--p) * 5) calc(var(--p) * -17),
+        calc(var(--p) * -5) calc(var(--p) * -15),
+        calc(var(--p) * 5) calc(var(--p) * 16);
+    }
+  }
+  
+  @media (prefers-reduced-motion) {
+    .contact-form-container {
+      animation: none;
+    }
+  }

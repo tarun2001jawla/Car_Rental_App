@@ -74,7 +74,7 @@ const CarAddForm = () => {
   
 
     try {
-      const response = await axiosInstance.post('http://localhost:5000/api/admin/add', formData, {
+      const response = await axiosInstance.post('http://localhost:5000/api/cars', formData, {
         headers: {
           'Content-Type': 'application/json',
         },

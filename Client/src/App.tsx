@@ -16,10 +16,13 @@ import ConfirmationPage from './components/ReservationConfirmForm/Confirmation';
 import AdminLoginForm from './components/admin page/adminLogin';
 import CarAddForm from './components/admin page/carAddForm';
 import OrderHistory from './components/admin page/orderHistory';
+import { UserProvider } from './components/contexts/userContext';
 function App() {
   return (
+   
     <BrowserRouter>
       <ChakraProvider>
+      <UserProvider>
         <Navbar />
      
         <Routes>
@@ -39,9 +42,10 @@ function App() {
       
         <Footer/>
         <ToastContainer />
-       
+        </UserProvider>
       </ChakraProvider>
     </BrowserRouter>
+   
   );
 }
 

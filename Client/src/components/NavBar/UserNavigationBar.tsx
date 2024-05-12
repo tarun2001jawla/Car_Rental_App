@@ -1,33 +1,27 @@
-// UserNavigation.tsx
-import React from 'react';
-import { Button, Text} from '@chakra-ui/react';
+import React, { useContext } from 'react';
+import { Button,Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { LuLogOut } from "react-icons/lu";
+import { LuLogOut } from 'react-icons/lu';
+import { UserContext } from '../../components/contexts/userContext';
+import './NavBar.css'
 
-import './NavBar.css';
+const UserNavigation: React.FC = () => {
+  const { user, setUser } = useContext(UserContext);
 
-interface UserNavigationProps {
-  isLoggedIn: boolean;
-  userName: string;
-  onLogout: () => void;
-}
+  const handleLogout = () => {
+    setUser(null);
+  };
 
-const UserNavigation: React.FC<UserNavigationProps> = ({ isLoggedIn, userName, onLogout }) => {
-  if (isLoggedIn) {
-    return (
-      <>
-        <Text color="white" mr={4} fontWeight="bold">
-          Hello, {userName}
+  return user ? (
+    <>
+    <Text color="white" mr={4} fontWeight="bold">
+          Hello, {user.name}
         </Text>
-        <Button colorScheme="red" variant="solid" onClick={onLogout}>
+      <Button colorScheme="red" variant="solid" onClick={handleLogout}>
         <LuLogOut />
-        </Button>
-      
-      </>
-    );
-  }
-
-  return (
+      </Button>
+    </>
+  ) : (
     <>
       <Button as={Link} to="/login" colorScheme="teal" mr={4}>
         Login
@@ -35,7 +29,6 @@ const UserNavigation: React.FC<UserNavigationProps> = ({ isLoggedIn, userName, o
       <Button as={Link} to="/signup" colorScheme="teal">
         Sign Up
       </Button>
-     
     </>
   );
 };

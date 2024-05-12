@@ -1,10 +1,13 @@
-import React, { useState, ChangeEvent, FormEvent, MouseEvent } from 'react';
-import { Box, FormControl, FormLabel, Input, Button, Flex, InputRightElement, InputGroup,Text,Link, } from '@chakra-ui/react';
+import React, { useState, ChangeEvent, FormEvent, MouseEvent, useContext } from 'react';
+import { Box, FormControl, FormLabel, Input, Button, Flex, InputRightElement, InputGroup, Text, Link } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../components/contexts/userContext';
+import GoogleAuthButton from './googleAuth';
+import GitHubAuthButton from './githubAuth';
 import './LogIn.css';
 
 interface FormData {
@@ -19,19 +22,17 @@ const LoginForm: React.FC = () => {
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
-  // Handle form input changes
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle password visibility
   const handlePasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setShowPassword(!showPassword);
   };
 
-  // Handle form submission
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     console.log('Form Data:', formData);
@@ -39,6 +40,9 @@ const LoginForm: React.FC = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', formData, { withCredentials: true });
       console.log('Response:', response);
+
+      // Update the user state in the UserContext
+      setUser(response.data.user);
 
       toast('🎉 Login successful!', {
         position: 'top-center',
@@ -52,16 +56,12 @@ const LoginForm: React.FC = () => {
         transition: Bounce,
       });
 
-      // Setting  the JWT token in a cookie
-      document.cookie = `token=${response.data.token}; path=/`;
-      console.log(`token=${response.data.token}`);
-
       setFormData({
         email: '',
         password: '',
       });
 
-      navigate('/'); 
+      navigate('/');
     } catch (err) {
       console.error('Error occurred while logging in:', err);
       toast.error(`Error occurred while logging in: ${err}`, {
@@ -104,9 +104,13 @@ const LoginForm: React.FC = () => {
               </InputRightElement>
             </InputGroup>
           </FormControl>
-          <Button type="submit" mt={4} bg="teal.500" color="white" _hover={{ bg: 'teal.600' }} className="login-button">
-            Login
+          <Button type="submit" mt={4} bg="teal.500" color="white" _hover={{ bg: 'teal.600' }} className="login-button" w="100%">
+            Sign In
           </Button>
+          <Box mt={4}>
+            <GoogleAuthButton />
+            <GitHubAuthButton />
+          </Box>
         </form>
         <Text mt={4}>
           Don't have an account? <Link color="teal.500" href="/signup">Create one</Link>

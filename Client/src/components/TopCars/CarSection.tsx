@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Text, SimpleGrid, Button } from '@chakra-ui/react';
-import CarCard from './TopCars';
-import './CarSection.css'
+import { Box, Text, SimpleGrid, Button, Flex, Heading, Image } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import './CarSection.css';
 
 interface CarSectionProps {
   title: string;
@@ -11,17 +11,54 @@ interface CarSectionProps {
 const CarSection: React.FC<CarSectionProps> = ({ title, cars }) => {
   return (
     <Box py={8}>
-      <Text fontSize="2xl" fontWeight="bold" mb={4}>
+      <Heading as="h2" fontSize="3xl" fontWeight="bold" mb={8} textAlign="center">
         {title}
-      </Text>
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
+      </Heading>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
         {cars.map((car, index) => (
-          <CarCard key={index} car={car} />
+          <Box
+            key={index}
+            borderWidth="1px"
+            borderRadius="lg"
+            overflow="hidden"
+            boxShadow="lg"
+            bg="white"
+            transition="all 0.3s ease-in-out"
+            _hover={{ boxShadow: 'xl', transform: 'translateY(-4px)' }}
+          >
+            <Image src={car.image} alt={`${car.brand} ${car.model}`} objectFit="cover" h="200px" w="100%" />
+
+            <Box p="6">
+              <Flex justify="space-between" alignItems="center">
+                <Box>
+                  <Text color="teal.500" fontWeight="semibold" letterSpacing="wide" fontSize="sm" textTransform="uppercase">
+                    {car.brand}
+                  </Text>
+                  <Text ml="2" fontSize="sm">
+                    {car.model}
+                  </Text>
+                </Box>
+                <Text fontWeight="semibold" fontSize="xl">
+                  ${car.pricePerDay}/day
+                </Text>
+              </Flex>
+
+              <Link to="/rentals">
+                <Button colorScheme="teal" mt={4} w="100%" size="md">
+                  Know More
+                </Button>
+              </Link>
+            </Box>
+          </Box>
         ))}
       </SimpleGrid>
-      <Button as="a" href="/rentals" colorScheme="teal" mt={8}>
-        View All
-      </Button>
+      <Flex justify="center" mt={8}>
+        <Link to="/rentals">
+          <Button colorScheme="teal" size="lg">
+            View All
+          </Button>
+        </Link>
+      </Flex>
     </Box>
   );
 };

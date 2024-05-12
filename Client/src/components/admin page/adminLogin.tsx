@@ -21,18 +21,28 @@ const AdminLoginForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/admin/login', {
+      const response = await axios.post('http://localhost:5000/api/users/login', {
         email,
         password,
       });
-      console.log('Response from server:', response.data);
-      toast({
-        title: 'Welcome Admin',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-      });
-      navigate('/admin/add');
+      const user = response.data.user;
+      if (user.role === 'admin') {
+        console.log('Admin logged in:', user);
+        toast({
+          title: 'Welcome Admin',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+        navigate('/admin/add');
+      } else {
+        toast({
+          title: 'Login Failed',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     } catch (error) {
       console.error('Error logging in:', error);
       toast({

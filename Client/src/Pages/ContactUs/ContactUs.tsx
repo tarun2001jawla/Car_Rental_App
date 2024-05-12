@@ -1,60 +1,117 @@
 import React, { useState } from 'react';
-import { Box, Heading, Flex, FormControl, FormLabel, Input, Textarea, Button, useToast } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Heading,
+  Input,
+  Textarea,
+  Button,
+  useToast,
+} from '@chakra-ui/react';
+import './ContactUs.css';
 
-
-const ContactUsPage: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    query: ''
-  });
-
+const ContactForm = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [query, setQuery] = useState('');
   const toast = useToast();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+
+    // Check if all fields are filled
+    if (!name || !email || !phone || !query) {
+      // Show warning toast
+      toast({
+        title: 'Warning',
+        description: 'Please fill in all fields.',
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+      });
+      return; // Exit function
+    }
+
+    console.log('Name:', name);
+    console.log('Email:', email);
+    console.log('Phone:', phone);
+    console.log('Query:', query);
+
+    // Show success toast
     toast({
       title: 'Query Submitted',
-      description: 'Your query has been submitted successfully!',
+      description: 'Your query has been received. We will get back to you soon.',
       status: 'success',
       duration: 5000,
       isClosable: true,
     });
+
+    // Clear form fields
+    setName('');
+    setEmail('');
+    setPhone('');
+    setQuery('');
   };
 
   return (
-    <Flex justify="center" align="center" h="100vh">
-      <Box p={8} maxW="md" borderWidth={1} borderRadius={8} boxShadow="lg">
-        <Heading mb={6}>Contact Us</Heading>
+    <Flex className="contact-form-container" justify="center" align="center" minH="100vh">
+      <Box
+        className="contact-form"
+        p={8}
+        borderRadius="md"
+        boxShadow="lg"
+        maxW="md"
+        w="full"
+      >
+        <Heading as="h2" fontSize="2xl" mb={6} textAlign="center">
+          Contact Us
+        </Heading>
         <form onSubmit={handleSubmit}>
-          <FormControl id="name" isRequired mb={4}>
-            <FormLabel>Name</FormLabel>
-            <Input type="text" name="name" value={formData.name} onChange={handleChange} />
-          </FormControl>
-          <FormControl id="email" isRequired mb={4}>
-            <FormLabel>Email</FormLabel>
-            <Input type="email" name="email" value={formData.email} onChange={handleChange} />
-          </FormControl>
-          <FormControl id="phone" isRequired mb={4}>
-            <FormLabel>Phone Number</FormLabel>
-            <Input type="tel" name="phone" value={formData.phone} onChange={handleChange} />
-          </FormControl>
-          <FormControl id="query" isRequired mb={4}>
-            <FormLabel>Query</FormLabel>
-            <Textarea name="query" value={formData.query} onChange={handleChange} />
-          </FormControl>
-          <Button type="submit" colorScheme="teal">Submit Query</Button>
+          <Input
+            className="form-input"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            mb={4}
+          />
+          <Input
+            className="form-input"
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            mb={4}
+          />
+          <Input
+            className="form-input"
+            placeholder="Phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            mb={4}
+          />
+          <Textarea
+            className="form-input"
+            placeholder="Query"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            mb={4}
+            resize="vertical"
+          />
+          <Button
+            className="submit-button"
+            type="submit"
+            colorScheme="teal"
+            size="lg"
+            w="full"
+            mt={4}
+          >
+            Submit
+          </Button>
         </form>
       </Box>
     </Flex>
   );
 };
 
-export default ContactUsPage;
+export default ContactForm;

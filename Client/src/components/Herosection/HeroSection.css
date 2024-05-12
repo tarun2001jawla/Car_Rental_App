@@ -1,24 +1,87 @@
 .hero-section {
-  background-image: url('../../../public//HeroSectionImage.svg');
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  background-blend-mode: overlay;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff8c8c, #ffd4d4);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-content {
-  text-align: center;
-  max-width: 800px;
+  z-index: 1;
+  text-align: left;
+  color: white;
+  animation: slide-in-left 1s ease-in-out;
+  margin-right: auto;
+  margin-left: 10%;
 }
 
-.hero-content h1
- {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-.highlight {
-  color: #fff724; 
+.sign-up-button {
+  background-color: #ff7f50;
+  border: none;
+  border-radius: 30px;
+  color: white;
   font-weight: bold;
-  font-size: 75px;
- 
+  padding: 16px 32px;
+  text-transform: uppercase;
+  transition: transform 0.3s ease-in-out;
+  animation: slide-in-bottom 1s ease-in-out;
+}
+
+.sign-up-button:hover {
+  transform: scale(1.1);
+}
+
+.illustration-container {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  animation: slide-in-right 1s ease-in-out;
+}
+
+.car-illustration {
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.highlight {
+  color: yellow;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
