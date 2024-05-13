@@ -1,4 +1,3 @@
-//Imports 
 import { Request, Response } from 'express';
 import User from '../model/User';
 import bcrypt from 'bcryptjs';
@@ -26,31 +25,4 @@ const handleUserSignUp = async (req: Request, res: Response) => {
   }
 };
 
-
-
-
-// Login controller
-// Login controller
-const handleUserLogin = (req: Request, res: Response, next: any) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
-      return next(err);
-    }
-
-    if (!user) {
-      return res.status(400).json({ message: info.message });
-    }
-
-    req.logIn(user, (err) => {
-      if (err) {
-        return next(err);
-      }
-      console.log("user data",user);
-      // Send the user data in the response
-      return res.json({ message: 'Login successful', user });
-      
-    });
-  })(req, res, next);
-};
-
-export default { handleUserSignUp, handleUserLogin };
+export default { handleUserSignUp };

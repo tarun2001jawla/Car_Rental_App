@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema } from "mongoose";
 
+// Define the structure of the items in the order
 interface OrderItem {
   carID: string;
   make: string;
@@ -10,23 +11,25 @@ interface OrderItem {
   transmission: string;
   seats: number; 
   pricePerDay: number; 
-  quantity : number;
-  
+  quantity: number;
 }
 
+// Define the structure of the user details for the order
 interface UserDetails {
   name: string;
   phone: string;
   email: string;
-  license : string;
+  license: string;
 }
 
+// Define the structure of the order document extending mongoose Document
 interface OrderDocument extends Document {
-  items: OrderItem[];
-  totalPrice: number;
-  details: UserDetails;
+  items: OrderItem[]; // Array of order items
+  totalPrice: number; // Total price of the order
+  details: UserDetails; // User details for the order
 }
 
+// Define the schema for the user details
 const userDetailsSchema = new Schema<UserDetails>({
   name: {
     type: String,
@@ -36,28 +39,30 @@ const userDetailsSchema = new Schema<UserDetails>({
     type: String,
     required: true,
   },
- 
   email: {
     type: String,
     required: true,
   },
-  license : {
+  license: {
     type: String,
     required: true,
   }
-},{timestamps:true});
+}, { timestamps: true }); // Automatically add createdAt and updatedAt fields
 
+// Define the schema for the order
 const orderSchema = new Schema<OrderDocument>({
   items: [
     {
-      carID: { type: String, required: true },
-      quantity: { type: Number, required: true },
+      carID: { type: String, required: true }, // Car ID of the item
+      quantity: { type: Number, required: true }, // Quantity of the item
     },
   ],
-  totalPrice: { type: Number, required: true },
-  details: { type: userDetailsSchema, required: true },
+  totalPrice: { type: Number, required: true }, // Total price of the order
+  details: { type: userDetailsSchema, required: true }, // User details for the order
 });
 
+// Create the Order model
 const Order = mongoose.model<OrderDocument>("Order", orderSchema);
 
+// Export the Order model
 export default Order;
