@@ -14,6 +14,8 @@ import fetchOrderRoute from './routes/fetchOrderRoute';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { googleAuth, googleAuthCallback } from './controller/googleAuthController';
 import { githubAuth, githubAuthCallback } from './controller/githubAuthController';
+import cluster from 'cluster'; 
+import os from 'os'; 
 
 dotenv.config();
 
@@ -27,42 +29,24 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Database connection
+// MongoDB connection string
+const mongoURI = 'mongodb://localhost:27017/car_rental_DB';
 
-import { MongoClient, ServerApiVersion } from 'mongodb';
-const uri = "mongodb+srv://TarunJawla:Tarunjawla%40123@atlascluster.7hp44bd.mongodb.net/car_rental_app?retryWrites=true&w=majority&appName=AtlasCluster";
+// Establishing MongoDB connection
+mongoose.connect(mongoURI);
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
+// Handling connection events
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB database');
 });
 
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
-
-module.exports = (req:Request, res:Response) => {
-  res.status(200).json({ message: 'Hello from Vercel serverless function!' });
-};
-
-//middlewares
+// Middlewares
 app.use(express.json());
 app.use(cors({
-  origin: 'https://car-rental-app-ruddy.vercel.app/', 
-  credentials: true 
+  origin: 'http://localhost:5173',
+  credentials: true
 }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -91,11 +75,6 @@ passport.use(
     }
   )
 );
-
-
-
-  
- 
 
 // Google authentication routes
 app.get('/auth/google', googleAuth);
@@ -130,25 +109,49 @@ passport.serializeUser((user: any, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findById(id).select('-password'); 
+    const user = await User.findById(id).select('-password');
     done(null, user);
   } catch (err) {
     done(err);
   }
 });
 
-//Routes 
+// Routes
 app.use("/api/users", userRoutes);
 app.use("/api/cars", carRoutes);
 app.use("/api/reserve", orderRoutes);
-app.use("/api/orders",fetchOrderRoute);
+app.use("/api/orders", fetchOrderRoute);
 
 // Default route
 app.get("/", (req: Request, res: Response) => {
-    res.send("Hello World,Welcome to Server");
+  res.send("Hello World, Welcome to Server");
 });
 
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Check if the process is the master or a worker
+if (cluster.isPrimary) {
+  // If the process is the master, create worker processes based on the number of CPUs
+  const numCPUs = os.cpus().length;
+  console.log(`Master process started with PID ${process.pid}`);
+
+  // Fork workers
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  // Handle worker exits
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`Worker ${worker.process.pid} died with code ${code} and signal ${signal}`);
+    console.log('Starting a new worker');
+    cluster.fork();
+  });
+} else {
+  // If the process is a worker, start the Express server
+  startServer();
+}
+
+function startServer() {
+  // Start the server
+  app.listen(PORT, () => {
+    console.log(`Worker ${process.pid} started. Server is running on port ${PORT}`);
+  });
+}
