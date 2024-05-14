@@ -10,7 +10,12 @@ import {
   InputRightElement,
   IconButton,
 } from "@chakra-ui/react";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import {
+  FaGithub,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+} from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "./Footer.css";
@@ -90,18 +95,14 @@ const Footer: React.FC = () => {
           </Heading>
           <Flex>
             <IconButton
-              aria-label="Facebook"
-              icon={<FaFacebook />}
+              aria-label="GitHub"
+              icon={<FaGithub />}
               variant="ghost"
               colorScheme="blue"
               mr={2}
-            />
-            <IconButton
-              aria-label="Twitter"
-              icon={<FaTwitter />}
-              variant="ghost"
-              colorScheme="blue"
-              mr={2}
+              as={Link}
+              href="https://github.com/tarun2001jawla"
+              target="_blank"
             />
             <IconButton
               aria-label="Instagram"
@@ -109,12 +110,28 @@ const Footer: React.FC = () => {
               variant="ghost"
               colorScheme="blue"
               mr={2}
+              as={Link}
+              href="https://www.instagram.com/tarun_jawla/"
+              target="_blank"
             />
             <IconButton
               aria-label="LinkedIn"
               icon={<FaLinkedin />}
               variant="ghost"
               colorScheme="blue"
+              mr={2}
+              as={Link}
+              href="https://www.linkedin.com/in/tarunjawlajaipur/"
+              target="_blank"
+            />
+            <IconButton
+              aria-label="Twitter"
+              icon={<FaTwitter />}
+              variant="ghost"
+              colorScheme="blue"
+              as={Link}
+              href="https://twitter.com/tarun_jawla"
+              target="_blank"
             />
           </Flex>
         </Box>
@@ -146,7 +163,7 @@ const Footer: React.FC = () => {
         <Text>
           &copy; {new Date().getFullYear()} Car Rental. All rights reserved.
         </Text>
-        <Text>Developed By Tarun Jawla</Text>
+        <Text> <a href="https://github.com/tarun2001jawla" target="blank">Developed By Tarun Jawla</a></Text>
       </Flex>
     </Box>
   );

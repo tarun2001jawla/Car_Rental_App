@@ -61,7 +61,7 @@ const AboutUs = () => {
           </Text>
         </Box>
 
-        <Box className="info-block yellow" p={8} borderRadius="md" maxW="md" m={4} _hover={{ transform: 'translateY(-8px)' }}>
+        <Box className="info-block brown" p={8} borderRadius="md" maxW="md" m={4} _hover={{ transform: 'translateY(-8px)' }}>
           <Heading as="h2" size="xl" color="white" mb={4}>
             Our Future
           </Heading>

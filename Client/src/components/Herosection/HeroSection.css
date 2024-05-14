@@ -85,3 +85,17 @@
     opacity: 1;
   }
 }
+
+
+.rotate {
+  animation: rotateAnimation 1s forwards;
+}
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

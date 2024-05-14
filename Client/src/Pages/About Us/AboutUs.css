@@ -3,7 +3,8 @@
 }
 
 .hero-section-about {
-  background: linear-gradient(to right, #667eea, #764ba2);
+  background-image: url('/public/2151003773.jpg');
+  opacity: 92%;
 }
 
 .content-section {
@@ -35,8 +36,8 @@
   background-color: #009688;
 }
 
-.yellow {
-  background-color: #ffeb3b;
+.brown {
+  background-color: brown;
   color: #333;
 }
 

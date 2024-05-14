@@ -1,12 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef ,useEffect} from 'react';
 import { Box, Flex, Heading, Button } from '@chakra-ui/react';
 import Typed from 'typed.js';
 import './HeroSection.css';
 import carIllustration from '../../../public/Work From Home 3.svg';
+
 interface HeroSectionProps {}
 
 const HeroSection: React.FC<HeroSectionProps> = () => {
   const typedRef = useRef<Typed | null>(null);
+  const carIllustrationRef = useRef<HTMLImageElement>(null);
+
+  const handleClick = () => {
+    if (carIllustrationRef.current) {
+      carIllustrationRef.current.classList.toggle('rotate');
+    }
+  };
 
   useEffect(() => {
     const options = {
@@ -33,8 +41,13 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
           Sign Up
         </Button>
       </Box>
-      <Box className="illustration-container">
-        <img src={carIllustration} alt="Car Illustration" className="car-illustration" />
+      <Box className="illustration-container" onClick={handleClick}>
+        <img
+          src={carIllustration}
+          alt="Car Illustration"
+          className="car-illustration"
+          ref={carIllustrationRef}
+        />
       </Box>
     </Flex>
   );
