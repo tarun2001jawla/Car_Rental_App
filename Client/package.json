@@ -26,7 +26,7 @@
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.23.0",
     "react-toastify": "^10.0.5",
-    "styled-components": "^6.1.11",
+    "styled-components": "^6.1.19",
     "typed.js": "^2.1.0"
   },
   "devDependencies": {
